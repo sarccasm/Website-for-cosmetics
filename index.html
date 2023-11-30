@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Косметика за тілом</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-top: 20px;
+    }
+
+    #result p {
+      font-weight: bold;
+    }
+
+    #result ul {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Косметика за тілом</h1>
+
+  <label for="bodyPart">Введіть назву тіла (волосся, обличчя, тіло):</label>
+  <input type="text" id="bodyPart" name="bodyPart">
+  <button onclick="showCosmetics()">Показати косметику</button>
+
+  <div id="result"></div>
+
+  <script>
+    function getCosmeticsByBodyPart(bodyPart) {
+      switch (bodyPart) {
+        case 'волосся':
+          return ['шампунь', 'кондиціонер', 'олія для волосся'];
+        case 'обличчя':
+          return ['очищувач', 'тонік', 'крем для обличчя'];
+        case 'тіло':
+          return ['гель для душу', 'лосьйон для тіла', 'пілінг'];
+        default:
+          return [];
+      }
+    }
+
+    function showCosmetics() {
+      var bodyPart = document.getElementById("bodyPart").value;
+      var cosmetics = getCosmeticsByBodyPart(bodyPart);
+      var resultDiv = document.getElementById("result");
+
+      resultDiv.innerHTML = "";
+
+      if (cosmetics.length > 0) {
+        var heading = document.createElement("p");
+        heading.textContent = "Косметика для " + bodyPart + ":";
+        resultDiv.appendChild(heading);
+
+        var productList = document.createElement("ul");
+        cosmetics.forEach(function (cosmetic) {
+          var listItem = document.createElement("li");
+          listItem.textContent = cosmetic;
+          productList.appendChild(listItem);
+        });
+
+        resultDiv.appendChild(productList);
+      } else {
+        var errorMessage = document.createElement("p");
+        errorMessage.textContent = "Вибрано невірну назву тіла.";
+        resultDiv.appendChild(errorMessage);
+      }
+    }
+  </script>
+</body>
+</html>
